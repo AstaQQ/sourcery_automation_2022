@@ -1,4 +1,3 @@
-module.exports = { SearchPage };
 class SearchResultsPage {
 
     constructor(page) {
