@@ -43,8 +43,8 @@ data.forEach(version => {
       let searchPage = new SearchPage(page);
       await searchPage.navigate();
       await page.selectOption('#selectBuild', { label: version});
-      await searchPage.search('5', '2'); // field1 and field2 value
-      await searchPage.selectOption('Multiply'); // operation field
+      await searchPage.search('5', '2');
+      await searchPage.selectOption('Multiply');
       await page.locator('#calculateButton').click();
   
       await expect(page.locator('#numberAnswerField')).toHaveValue('10');
@@ -54,8 +54,8 @@ data.forEach(version => {
       let searchPage = new SearchPage(page);
       await searchPage.navigate();
       await page.selectOption('#selectBuild', { label: version});
-      await searchPage.search('6', '2'); // field1 and field2 value
-      await searchPage.selectOption('Divide'); // operation field
+      await searchPage.search('6', '2');
+      await searchPage.selectOption('Divide');
       await page.locator('#calculateButton').click();
   
       await expect(page.locator('#numberAnswerField')).toHaveValue('3');
@@ -65,11 +65,20 @@ data.forEach(version => {
       let searchPage = new SearchPage(page);
       await searchPage.navigate();
       await page.selectOption('#selectBuild', { label: version});
-      await searchPage.search('1', '1'); // field1 and field2 value
-      await searchPage.selectOption('Concatenate'); // operation field
+      await searchPage.search('1', '1');
+      await searchPage.selectOption('Concatenate');
       await page.locator('#calculateButton').click();
   
       await expect(page.locator('#numberAnswerField')).toHaveValue('11');
+    });
+
+    test('Checkbox Integers only should be visible in all builds', async ({ page }) => {
+      let searchPage = new SearchPage(page);
+      await searchPage.navigate();
+      await page.selectOption('#selectBuild', { label: version});
+      await page.selectOption('#selectOperationDropdown', { label: Subtract});
+
+      await expect(page.locator('#integerSelect')).toBeVisible();
     });
   });
 });
